@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS Variables</title>
+    <style>
+        :root {
+            --color: yellow;
+            --spacing : 10px;
+            --blur: 0px;
+        }
+        body {
+            text-align: center;
+        }
+
+        body {
+            font-family: 'helvetica neue', sans-serif;
+            background: linear-gradient(to right, #16bffd, #cb3066);
+            color: white;
+            font-size: 25px;
+        }
+
+        .form-controls {
+            margin-bottom: 20px;
+        }
+        .accent
+        {
+            color: var(--color);
+        }
+
+        img 
+        {
+            width: 50%;
+            border: 15px solid var(--color);
+            padding: var(--spacing);
+            filter: blur(var(--blur));
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Update CSS Variables with <span class="accent">JS</span></h1>
+    <form class="form-controls" action="">
+        <label for="spacing">Spacing</label>
+        <input type="range" id="spacing" name="spacing" value="0">
+
+        <label for="blur">Blur</label>
+        <input type="range" id="blur" name="blue" value="0">
+
+        <label for="color">Base Color</label>
+        <input type="color" id="color" value="#ffff00">
+
+    </form>
+    <img class="img" src="https://source.unsplash.com/user/giovannipoveda51" alt="Image">
+    <script>
+        const inputs = [].slice.call(document.querySelectorAll('input'));
+        const accent = document.querySelector('.accent')
+        const img = document.querySelector('img')
+        
+        inputs.forEach( input => input.addEventListener('change', modified) )
+        
+        function modified(e)
+        {
+            
+            if(this.type === 'color')
+            {
+                 img.style.setProperty(`--${this.id}`, `${e.target.value}`)
+                 accent.style.setProperty(`--${this.id}`, `${e.target.value}`)
+            }
+            else
+            {
+
+                img.style.setProperty(`--${this.id}`, `${e.target.value}px`)
+            }
+        }
+
+        
+    </script>
+
+</body>
+</html>
